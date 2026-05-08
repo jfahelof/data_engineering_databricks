@@ -174,6 +174,11 @@
               "lines": [
                 "<span style=\"text-align:center;display:block\"><span style=\"font-size: 60px;line-height: 1.5;color: #077A9D;\">**Sinistros de Trânsito de Recife**</span></span>"
               ]
+            },
+            "specExtensions": {
+              "widgetBorderColor": {
+                "dark": "#1976D3"
+              }
             }
           },
           "position": {
@@ -730,6 +735,47 @@
                 "showTitle": true,
                 "title": "Total de acidentes por meio de transporte"
               },
+              "mark": {
+                "colors": [
+                  "#95CAA5",
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
               "widgetType": "bar",
               "encodings": {
                 "x": {
@@ -758,6 +804,12 @@
         }
       ],
       "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    },
+    {
+      "name": "d947eb08",
+      "displayName": "Global Filters",
+      "pageType": "PAGE_TYPE_GLOBAL_FILTERS",
       "layoutVersion": "GRID_V1"
     }
   ],
