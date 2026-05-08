@@ -172,7 +172,7 @@
             "name": "fd228fce",
             "multilineTextboxSpec": {
               "lines": [
-                "<span style=\"text-align:center;display:block\"><span style=\"font-size: 60px;line-height: 1.5;color: #FFAB00;\">Sinistros de Trânsito de Recife</span></span>"
+                "<span style=\"text-align:center;display:block\"><span style=\"font-size: 60px;line-height: 1.5;color: #00A972;\">**Sinistros de Trânsito de Recife**</span></span>"
               ]
             }
           },
@@ -331,7 +331,7 @@
               "version": 3,
               "mark": {
                 "colors": [
-                  "#C5AB25",
+                  "#D85D0D",
                   {
                     "themeColorType": "visualizationColors",
                     "position": 2
@@ -381,7 +381,7 @@
                 },
                 "y": {
                   "fieldName": "sum(total_acidentes)",
-                  "displayName": "Número de Acidentes",
+                  "displayName": "Total Acidentes",
                   "scale": {
                     "type": "quantitative"
                   }
@@ -397,6 +397,194 @@
             "y": 5,
             "width": 12,
             "height": 8
+          }
+        },
+        {
+          "widget": {
+            "name": "e5027f5f",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "a976620e",
+                  "fields": [
+                    {
+                      "name": "hora_dia",
+                      "expression": "`hora_dia`"
+                    },
+                    {
+                      "name": "sum(total_acidentes)",
+                      "expression": "SUM(`total_acidentes`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "area",
+              "encodings": {
+                "x": {
+                  "fieldName": "hora_dia",
+                  "displayName": "Hora",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_acidentes)",
+                  "displayName": "Total Acidentes",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 13,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "ee054042",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "28bdf069",
+                  "fields": [
+                    {
+                      "name": "mes",
+                      "expression": "`mes`"
+                    },
+                    {
+                      "name": "sum(total_acidentes)",
+                      "expression": "SUM(`total_acidentes`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "mark": {
+                "colors": [
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 1
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "area",
+              "encodings": {
+                "x": {
+                  "fieldName": "mes",
+                  "displayName": "Mês",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_acidentes)",
+                  "displayName": "Total Acidentes",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 19,
+            "width": 6,
+            "height": 6
           }
         }
       ],
