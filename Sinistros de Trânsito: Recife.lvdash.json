@@ -165,14 +165,14 @@
   "pages": [
     {
       "name": "89859f8c",
-      "displayName": "Untitled page",
+      "displayName": "dash",
       "layout": [
         {
           "widget": {
             "name": "fd228fce",
             "multilineTextboxSpec": {
               "lines": [
-                "<span style=\"text-align:center;display:block\"><span style=\"font-size: 60px;line-height: 1.5;color: #00A972;\">**Sinistros de Trânsito de Recife**</span></span>"
+                "<span style=\"text-align:center;display:block\"><span style=\"font-size: 60px;line-height: 1.5;color: #077A9D;\">**Sinistros de Trânsito de Recife**</span></span>"
               ]
             }
           },
@@ -206,7 +206,8 @@
               "frame": {
                 "title": "Total de Acidentes",
                 "showTitle": true,
-                "contentAlignment": "center"
+                "contentAlignment": "center",
+                "showDescription": false
               },
               "widgetType": "counter",
               "encodings": {
@@ -247,7 +248,8 @@
               "frame": {
                 "title": "Total de Vítimas",
                 "showTitle": true,
-                "contentAlignment": "center"
+                "contentAlignment": "center",
+                "showDescription": false
               },
               "widgetType": "counter",
               "encodings": {
@@ -307,7 +309,7 @@
         },
         {
           "widget": {
-            "name": "7432b808",
+            "name": "to",
             "queries": [
               {
                 "name": "main_query",
@@ -329,6 +331,11 @@
             ],
             "spec": {
               "version": 3,
+              "frame": {
+                "showTitle": true,
+                "showDescription": false,
+                "title": "Total de acidentes por bairro"
+              },
               "mark": {
                 "colors": [
                   "#D85D0D",
@@ -401,7 +408,7 @@
         },
         {
           "widget": {
-            "name": "e5027f5f",
+            "name": "total-acidentes-por-bairro",
             "queries": [
               {
                 "name": "main_query",
@@ -423,6 +430,12 @@
             ],
             "spec": {
               "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Total de acidentes por hora",
+                "showDescription": true,
+                "description": "Como podemos ver, os dados estão limitados da meia noite ao meio dia."
+              },
               "mark": {
                 "colors": [
                   {
@@ -495,7 +508,7 @@
         },
         {
           "widget": {
-            "name": "ee054042",
+            "name": "total-de",
             "queries": [
               {
                 "name": "main_query",
@@ -517,6 +530,10 @@
             ],
             "spec": {
               "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Total de acidentes por mês"
+              },
               "mark": {
                 "colors": [
                   {
@@ -581,7 +598,159 @@
             }
           },
           "position": {
+            "x": 6,
+            "y": 13,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "total-acidentos",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "28bdf069",
+                  "fields": [
+                    {
+                      "name": "mes",
+                      "expression": "`mes`"
+                    },
+                    {
+                      "name": "sum(total_fatais)",
+                      "expression": "SUM(`total_fatais`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Total de acidentes com vítimas fatais"
+              },
+              "mark": {
+                "colors": [
+                  "#BD3939",
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "mes",
+                  "displayName": "Mês",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_fatais)",
+                  "displayName": "Total Fatais",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
             "x": 0,
+            "y": 19,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "t1",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "2e4742a9",
+                  "fields": [
+                    {
+                      "name": "meio_transporte",
+                      "expression": "`meio_transporte`"
+                    },
+                    {
+                      "name": "sum(total_acidentes)",
+                      "expression": "SUM(`total_acidentes`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "showTitle": true,
+                "title": "Total de acidentes por meio de transporte"
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "meio_transporte",
+                  "displayName": "Meio de Transporte",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_acidentes)",
+                  "displayName": "Total Acidentes",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 6,
             "y": 19,
             "width": 6,
             "height": 6
