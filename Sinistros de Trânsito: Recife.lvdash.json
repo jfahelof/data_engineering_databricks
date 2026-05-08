@@ -51,6 +51,115 @@
           }
         ]
       }
+    },
+    {
+      "name": "a976620e",
+      "displayName": "tb_sinistros_transito_hora",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.gold.tb_sinistros_transito_hora",
+        "dimensions": [
+          {
+            "name": "hora_dia",
+            "expr": "source.hora_dia",
+            "displayName": "Hora Dia"
+          },
+          {
+            "name": "total_acidentes",
+            "expr": "source.total_acidentes",
+            "displayName": "Total Acidentes"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "28bdf069",
+      "displayName": "tb_sinistros_transito_mes",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.gold.tb_sinistros_transito_mes",
+        "dimensions": [
+          {
+            "name": "mes",
+            "expr": "source.mes",
+            "displayName": "Mes"
+          },
+          {
+            "name": "total_acidentes",
+            "expr": "source.total_acidentes",
+            "displayName": "Total Acidentes"
+          },
+          {
+            "name": "total_vitimas",
+            "expr": "source.total_vitimas",
+            "displayName": "Total Vitimas"
+          },
+          {
+            "name": "total_fatais",
+            "expr": "source.total_fatais",
+            "displayName": "Total Fatais"
+          },
+          {
+            "name": "taxa_fatalidade",
+            "expr": "source.taxa_fatalidade",
+            "displayName": "Taxa Fatalidade"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "2e4742a9",
+      "displayName": "tb_sinistros_transito_transporte",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.gold.tb_sinistros_transito_transporte",
+        "dimensions": [
+          {
+            "name": "meio_transporte",
+            "expr": "source.meio_transporte",
+            "displayName": "Meio Transporte"
+          },
+          {
+            "name": "total_acidentes",
+            "expr": "source.total_acidentes",
+            "displayName": "Total Acidentes"
+          },
+          {
+            "name": "total_fatais",
+            "expr": "source.total_fatais",
+            "displayName": "Total Fatais"
+          },
+          {
+            "name": "taxa_fatalidade",
+            "expr": "source.taxa_fatalidade",
+            "displayName": "Taxa Fatalidade"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
     }
   ],
   "pages": [
@@ -72,6 +181,128 @@
             "y": 0,
             "width": 12,
             "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "791e3f48",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "26488059",
+                  "fields": [
+                    {
+                      "name": "sum(total_acidentes)",
+                      "expression": "SUM(`total_acidentes`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total de Acidentes",
+                "showTitle": true,
+                "contentAlignment": "center"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_acidentes)",
+                  "displayName": "Total de Acidentes"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "e6664ecf",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "26488059",
+                  "fields": [
+                    {
+                      "name": "sum(total_vitimas)",
+                      "expression": "SUM(`total_vitimas`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total de Vítimas",
+                "showTitle": true,
+                "contentAlignment": "center"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_vitimas)",
+                  "displayName": "Total de Vítimas"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 2,
+            "width": 4,
+            "height": 3
+          }
+        },
+        {
+          "widget": {
+            "name": "e7993e3b",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "26488059",
+                  "fields": [
+                    {
+                      "name": "sum(total_fatais)",
+                      "expression": "SUM(`total_fatais`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 2,
+              "frame": {
+                "title": "Total de Vítimas Fatais",
+                "showTitle": true,
+                "contentAlignment": "center"
+              },
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_fatais)"
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 2,
+            "width": 4,
+            "height": 3
           }
         }
       ],
@@ -96,7 +327,7 @@
       },
       "fontColor": {
         "light": "#374151",
-        "dark": "#662020"
+        "dark": "#E2CECE"
       },
       "selectionColor": {
         "light": "#5FA8D3",
