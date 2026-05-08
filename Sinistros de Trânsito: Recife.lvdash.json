@@ -1,0 +1,121 @@
+{
+  "datasets": [
+    {
+      "name": "0bf6bec8",
+      "displayName": "Untitled dataset",
+      "queryLines": [
+        ""
+      ],
+      "catalog": "workspace",
+      "schema": "gold"
+    },
+    {
+      "name": "26488059",
+      "displayName": "tb_sinistros_transito_bairro",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.gold.tb_sinistros_transito_bairro",
+        "dimensions": [
+          {
+            "name": "bairro",
+            "expr": "source.bairro",
+            "displayName": "Bairro"
+          },
+          {
+            "name": "total_acidentes",
+            "expr": "source.total_acidentes",
+            "displayName": "Total Acidentes"
+          },
+          {
+            "name": "total_vitimas",
+            "expr": "source.total_vitimas",
+            "displayName": "Total Vitimas"
+          },
+          {
+            "name": "total_fatais",
+            "expr": "source.total_fatais",
+            "displayName": "Total Fatais"
+          },
+          {
+            "name": "taxa_fatalidade",
+            "expr": "source.taxa_fatalidade",
+            "displayName": "Taxa Fatalidade"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "89859f8c",
+      "displayName": "Untitled page",
+      "layout": [
+        {
+          "widget": {
+            "name": "fd228fce",
+            "multilineTextboxSpec": {
+              "lines": [
+                "<span style=\"text-align:center;display:block\"><span style=\"font-size: 60px;line-height: 1.5;color: #FFAB00;\">Sinistros de Trânsito de Recife</span></span>"
+              ]
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 12,
+            "height": 2
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "locale": "pt-BR",
+    "theme": {
+      "canvasBackgroundColor": {
+        "light": "#F6FAFB",
+        "dark": "#1B1F23"
+      },
+      "widgetBackgroundColor": {
+        "light": "#FFFFFF",
+        "dark": "#2A2F35"
+      },
+      "widgetBorderColor": {
+        "light": "#D7E1E9",
+        "dark": "#3C444C"
+      },
+      "fontColor": {
+        "light": "#374151",
+        "dark": "#662020"
+      },
+      "selectionColor": {
+        "light": "#5FA8D3",
+        "dark": "#252F35"
+      },
+      "visualizationColors": [
+        "#5FA8D3",
+        "#70BEE1",
+        "#89CCE7",
+        "#A1DAEC",
+        "#B3E6DC",
+        "#89C7A8",
+        "#6EAD80",
+        "#589F60",
+        "#478743",
+        "#356C2A"
+      ],
+      "widgetHeaderAlignment": "LEFT"
+    },
+    "applyModeEnabled": false
+  }
+}
