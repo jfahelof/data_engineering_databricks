@@ -19,6 +19,7 @@ Na Figura 1, observamos no topo as principais tecnologias utilizadas. Utilizamos
 
 Vamos explicar como cada etapa da pipeline foi desenvolvida. 
 
+
 ### Fonte de dados
 
 Os dados explorados neste trabalho foram obtidos a partir dos dados públicos de Sinistros de Trânsito com e sem vitimas do ano 2024 da capital pernambucana, Recife, disponibilizados pela [API de Dados Abertos do Recife](https://dados.recife.pe.gov.br/es/dataset/acidentes-de-transito-com-e-sem-vitimas/resource/87ac4237-f5f9-44d2-bcf1-927aaa0a2d31). Utilizamos o notebook **API.ipynb** para fazer a requisição dos dados **data.csv**. 
@@ -26,6 +27,7 @@ Os dados explorados neste trabalho foram obtidos a partir dos dados públicos de
 A partir de agora, entraremos na estrutura medallion do pipeline. Esta estrutura é formada por três camadas, Bronze, Silver e Gold. A estrutura Medallion define como os dados evoluem e como cada camada está relacionada, de modo que a qualidade dos dados aumente. Cada camada será representada por um catálogo/schema. Vamos descrever o que foi feito em cada camada desta estrutura de forma bem detalhada. 
 
 Para criar os bancos de dados da estrutura medallion, utilizamos o **notebook_01_medallion.ipynb**. Neste notebook, usamos **SQL** para criar cada um dos bancos de dados, bronze, silver, gold e analytics. Vamos para a camada Bronze. 
+
 
 ### Bronze
 
@@ -53,9 +55,14 @@ Nesta etapa da pipeline, os dados passaram por um tratamento profundo de refinam
 
 Nesta etapa é fundamental uma análise exploratória. Primeiro verificamos se havia linhas duplicadas, mas não existiam. Logo após, detectamos colunas totalmente vazias ou com menos de 50% dos dados devidamente preenchidos. Removemos todas estas colunas, pois nenhuma informação útil poderia ser encontrda com elas. Para garantir total privacidade dos dados, removemos os identificadores de protocolo. Algumas colunas que deveriam ser preenchidas com números inteiros, estavam declaradas como string. Por exemplo, algo que deveriam ser 0, 1, ou 2, estavam escritas com vírgula, ou seja, 0,0, 1,0, 2,0. Além de ocupar muita memória, armazenar os dados desta forma também atrapalham em análises numéricas, logo, fizemos uma convenção de 0,0 -> 0, 1,0 -> 1 e assim por diante. Por fim, padronizamos os valores nulos encontrados em algumas colunas, entradas que não estavam preenchidas, colocamos 'NA'. 
 
-Após o processo de tipagem e limpeza dos dados, observamos uma redução superior a 40% no tamanho do DataFrame em memória. Essa otimização melhora a eficiência no armazenamento e processamento dos dados, reduzindo o consumo de memória e aumentando o desempenho das operações analíticas realizadas ao longo da pipeline. Logo após, fizemos a persistência dos dados na camada Silver em formato Delta Lake (Parket). 
+Após o processo de tipagem e limpeza dos dados, observamos uma redução superior a 40% no tamanho do DataFrame em memória. Essa otimização melhora a eficiência no armazenamento e processamento dos dados, reduzindo o consumo de memória e aumentando o desempenho das operações analíticas realizadas ao longo da pipeline. Logo após, fizemos a persistência dos dados na camada Silver em formato Delta Lake (Parquet). 
 
-Embora o cenário atual não envolva ingestão incremental, a utilização do Delta Lake garante que o pipeline esteja preparado para evoluções futuras, mantendo escalabilidade e robustez. Após a gravação dos dados, será criada uma tabela no catálogo do Databricks (Unity Catalog), permitindo consultas via SQL diretamente sobre os dados armazenados no Data Lake, sem necessidade de duplicação. Essa abordagem assegura um fluxo de dados eficiente, confiável e alinhado com boas práticas de engenharia de dados.
+Embora o cenário atual não envolva ingestão incremental, a utilização do Delta Lake garante que o pipeline esteja preparado para evoluções futuras, mantendo escalabilidade e robustez. Após a gravação dos dados, será criada uma tabela no catálogo do Databricks (Unity Catalog), permitindo consultas via SQL diretamente sobre os dados armazenados no Data Lake, sem necessidade de duplicação. Essa abordagem assegura um fluxo de dados eficiente, confiável e alinhado com boas práticas de engenharia de dados. Todo este processo da camada Silver está presente no **notebook_03_silver.ipynb**. Agora, vamos para a camada Gold. 
+
+
+## Gold
+
+
  
 
 
