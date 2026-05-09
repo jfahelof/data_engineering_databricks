@@ -33,10 +33,31 @@ Nesta etapa do pipeline, a camada Bronze é a primeira da estrutura Medallion. A
 
 Feito isso, salvamos os dados brutos na camada Bronze. Nesta etapa, os dados são gravados utilizando o formato Delta Lake, que é construído sobre arquivos Parquet. O Parquet é um formato de armazenamento colunar, permitindo maior eficiência na compressão e melhor desempenho em consultas, pois apenas as colunas necessárias são lidas durante o processamento. O Delta Lake adiciona funcionalidades importantes ao Parquet, como controle de versão, transações ACID e suporte a cargas incrementais. Isso garante maior confiabilidade no processamento de dados, evitando inconsistências e permitindo operações como inserção, atualização e merge de dados.
 
-Além disso, será criada uma tabela externa no catálogo do Databricks, apontando para os arquivos armazenados no Data Lake. Dessa forma, os dados podem ser consultados via SQL sem a necessidade de duplicação, facilitando a integração com ferramentas analíticas e de visualização. Com essa abordagem, obtemos um pipeline mais eficiente, escalável e confiável para o processamento de grandes volumes de dados. Agora, iremos para a camada Silver. 
+Além disso, será criada uma tabela externa no catálogo do Databricks, apontando para os arquivos armazenados no Data Lake. Dessa forma, os dados podem ser consultados via SQL sem a necessidade de duplicação, facilitando a integração com ferramentas analíticas e de visualização. Com essa abordagem, obtemos um pipeline mais eficiente, escalável e confiável para o processamento de grandes volumes de dados. Todo este processo da camada Bronze está presente no **notebook_02_bronze.ipynb**. Agora, iremos para a camada Silver. 
 
 
 ### Silver
 
+Nesta etapa da pipeline, os dados passaram por um tratamento profundo de refinamento. Para entender todo o processo realizado nesta etapa vamos falar um pouco da estrutura dos dados obtidos. Os dados da camada Bronze foram inicialmente carregados com 41 colunas e 5315 registros. Como os dados foram obtidos diretamente da API pública, a maior parte das colunas foi inicialmente interpretada como `object`, exigindo posteriormente um processo de tipagem e padronização na camada Silver. Um exemplo da estrutura dos dados está mostrado na tabela abaixo:
+
+| Coluna      | Tipo inicial |
+|--------------|--------------|
+| Protocolo    | object |
+| data         | object |
+| hora         | object |
+| bairro       | object |
+| vitimas      | object |
+| ano          | int32 |
+| mes          | int32 |
+| dia          | int32 |
+
+Nesta etapa é fundamental uma análise exploratória. Primeiro verificamos se havia linhas duplicadas, mas não existiam. Logo após, detectamos colunas totalmente vazias ou com menos de 50% dos dados devidamente preenchidos. Removemos todas estas colunas, pois nenhuma informação útil poderia ser encontrda com elas. Para garantir total privacidade dos dados, removemos os identificadores de protocolo. Algumas colunas que deveriam ser preenchidas com números inteiros, estavam declaradas como string. Por exemplo, algo que deveriam ser 0, 1, ou 2, estavam escritas com vírgula, ou seja, 0,0, 1,0, 2,0. Além de ocupar muita memória, armazenar os dados desta forma também atrapalham em análises numéricas, logo, fizemos uma convenção de 0,0 -> 0, 1,0 -> 1 e assim por diante. Por fim, padronizamos os valores nulos encontrados em algumas colunas, entradas que não estavam preenchidas, colocamos 'NA'. 
+
+Após o processo de tipagem e limpeza dos dados, observamos uma redução superior a 40% no tamanho do DataFrame em memória. Essa otimização melhora a eficiência no armazenamento e processamento dos dados, reduzindo o consumo de memória e aumentando o desempenho das operações analíticas realizadas ao longo da pipeline. Logo após, fizemos a persistência dos dados na camada Silver em formato Delta Lake (Parket). 
+
+Embora o cenário atual não envolva ingestão incremental, a utilização do Delta Lake garante que o pipeline esteja preparado para evoluções futuras, mantendo escalabilidade e robustez. Após a gravação dos dados, será criada uma tabela no catálogo do Databricks (Unity Catalog), permitindo consultas via SQL diretamente sobre os dados armazenados no Data Lake, sem necessidade de duplicação. Essa abordagem assegura um fluxo de dados eficiente, confiável e alinhado com boas práticas de engenharia de dados.
+ 
 
 
+
+ 
