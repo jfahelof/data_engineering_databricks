@@ -62,9 +62,15 @@ Embora o cenário atual não envolva ingestão incremental, a utilização do De
 
 ## Gold
 
-A camada Gold da arquitetura medallion é a etapa da pipeline que é responsável pela entrega de dados prontos para o uso em análise e predições. Neste 
+A camada Gold da arquitetura medallion é a etapa da pipeline de dados responsável pela disponibilização de dados refinados, agregados e prontos para consumo analítico. Nessa camada, são aplicadas regras de negócio, métricas e transformações que permitem gerar insights estratégicos, dashboards e análises preditivas.
 
+Como o projeto utiliza dados de sinistros de trânsito da cidade do Recife, o foco da camada Gold foi a construção de tabelas analíticas capazes de responder questões relevantes para a mobilidade urbana e segurança no trânsito. Entre os exemplos de análises desenvolvidas estão: bairros com maior número de acidentes, horários de maior ocorrência, tipos de veículos mais envolvidos em sinistros e meios de transporte associados a acidentes fatais.
+
+Além disso, foram criadas métricas agregadas e tabelas otimizadas para visualização em dashboards no Databricks, permitindo uma análise mais eficiente dos padrões de acidentes ao longo do tempo e do espaço urbano. O objetivo final dessa camada é transformar os dados processados em informações úteis para apoiar tomadas de decisão, planejamento urbano e possíveis ações de prevenção de acidentes. Todo processo aplicado na camada Gold está presente no **notebook_04_gold.ipynb**. Agora, vamos para a etapa final da pipeline, Analytics. 
  
+
+## Analytics
+
 
 
 
