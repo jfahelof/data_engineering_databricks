@@ -1,6 +1,6 @@
 # Pipeline de Engenharia de Dados com Databricks
 
-Neste repositório, implementamos um projeto de engenharia de dados de ponta a ponta utilizando dados de sinistros de trânsito da cidade do Recife obtidos através da [API de Dados Abertos do Recife](https://dados.recife.pe.gov.br/es/dataset/acidentes-de-transito-com-e-sem-vitimas/resource/87ac4237-f5f9-44d2-bcf1-927aaa0a2d31). O objetivo deste trabalho é desenvolver uma pipeline de dados baseada na arquitetura Medallion utilizando Databricks, PySpark e Delta Lake, passando pelas camadas Bronze, Silver e Gold até a construção de análises e dashboards analíticos. Durante o desenvolvimento do projeto, foram realizadas etapas de ingestão, limpeza, tratamento, padronização e modelagem dos dados, garantindo maior qualidade, organização e confiabilidade das informações para fins analíticos.
+Neste repositório, implementamos um projeto de engenharia de dados de ponta a ponta utilizando dados de sinistros de trânsito da cidade do Recife obtidos através da [API de Dados Abertos do Recife](https://dados.recife.pe.gov.br/es/dataset/acidentes-de-transito-com-e-sem-vitimas/resource/87ac4237-f5f9-44d2-bcf1-927aaa0a2d31). Os dados apresentados neste projeto correspondem a ocorrências reais de sinistros de trânsito. A análise tem caráter exclusivamente analítico e busca contribuir para discussões relacionadas à mobilidade urbana e segurança no trânsito, sempre com respeito às vítimas e seus familiares. O objetivo deste trabalho é desenvolver uma pipeline de dados baseada na arquitetura Medallion utilizando Databricks, PySpark e Delta Lake, passando pelas camadas Bronze, Silver e Gold até a construção de análises e dashboards analíticos. Durante o desenvolvimento do projeto, foram realizadas etapas de ingestão, limpeza, tratamento, padronização e modelagem dos dados, garantindo maior qualidade, organização e confiabilidade das informações para fins analíticos.
 
 
 ## Arquitetura da pipeline
@@ -71,7 +71,32 @@ Além disso, foram criadas métricas agregadas e tabelas otimizadas para visuali
 
 ## Analytics
 
+A etapa Analytics é a parte final da nossa pipeline de dados, ela é responsável pela exploração visual e interpretação dos dados processados na camada Gold. Nesta etapa, os dados refinados são utilizados para construir gráficos, dashboards e indicadores que auxiliam na identificação de padrões e tendências relacionadas aos sinistros de trânsito em Recife. A camada Analytics permite que gestores, analistas e usuários finais obtenham insights relevantes para apoiar tomadas de decisão e estratégias voltadas à mobilidade urbana e segurança no trânsito.
 
 
+O produto final do projeto foi um dashboard com algumas das possíveis anélises. Como o objetivo deste trabalho é focado em engenharia de dados, não fora realizado uma análise mais profunda. O dashboard foi construído na plataforma do Databricks. Através do SQL Warehouse do Databricks, foi possível recuperar todas as informações (tabelas) produzidas na camada Gold.  
 
- 
+
+ <p align="center">
+  <img src="imgs/dash recife.png" width="1000">
+</p>
+
+<p align="center">
+  <em>Figura 2: Construção do Dashboard no Databricks.</em>
+</p>
+
+Na Figura 2, observamos a interface da plataforma do Databricks. Na imagem podemos observar o título do dashboard, um total de 5320 acidentes, 5040 vítimas e o número total de 40 vítimas fatais. Logo abaixo temos um gráfico de barras interativo indicando o número total de acidentes por bairro. O restante do dashboard é formado por mais alguns gráficos, iremos discutir os resultados de forma detalhada. 
+
+
+### Distribuição de acidentes por bairro:
+
+Na Figura 3 temos uma distribuição da participação de cada bairro no número total de acidentes. Como podemos observar, Boa Viagem foi o bairro do Recife que mais ocorreu acidentes em 2024, 
+
+
+ <p align="center">
+  <img src="imgs/Distribuição de Acidentes por Bairro.png" width="1000">
+</p>
+
+<p align="center">
+  <em>Figura 3: Distribuição de acidentes por bairro.</em>
+</p>

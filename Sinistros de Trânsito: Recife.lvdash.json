@@ -160,6 +160,54 @@
           }
         ]
       }
+    },
+    {
+      "name": "3af94ab0",
+      "displayName": "tb_sinistros_transito_bairro",
+      "config": {
+        "version": "1.1",
+        "source": "workspace.gold.tb_sinistros_transito_bairro",
+        "dimensions": [
+          {
+            "name": "bairro",
+            "expr": "source.bairro",
+            "displayName": "Bairro"
+          },
+          {
+            "name": "total_acidentes",
+            "expr": "source.total_acidentes",
+            "displayName": "Total Acidentes"
+          },
+          {
+            "name": "total_vitimas",
+            "expr": "source.total_vitimas",
+            "displayName": "Total Vitimas"
+          },
+          {
+            "name": "total_fatais",
+            "expr": "source.total_fatais",
+            "displayName": "Total Fatais"
+          },
+          {
+            "name": "taxa_fatalidade",
+            "expr": "source.taxa_fatalidade",
+            "displayName": "Taxa Fatalidade"
+          },
+          {
+            "name": "percentual_acidentes",
+            "expr": "source.percentual_acidentes",
+            "displayName": "Percentual Acidentes"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
     }
   ],
   "pages": [
@@ -505,7 +553,7 @@
             }
           },
           "position": {
-            "x": 0,
+            "x": 6,
             "y": 13,
             "width": 6,
             "height": 6
@@ -603,8 +651,8 @@
             }
           },
           "position": {
-            "x": 6,
-            "y": 13,
+            "x": 0,
+            "y": 19,
             "width": 6,
             "height": 6
           }
@@ -701,7 +749,7 @@
             }
           },
           "position": {
-            "x": 0,
+            "x": 6,
             "y": 19,
             "width": 6,
             "height": 6
@@ -796,8 +844,157 @@
             }
           },
           "position": {
+            "x": 0,
+            "y": 25,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "cec0af69",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "3af94ab0",
+                  "fields": [
+                    {
+                      "name": "sum(total_acidentes)",
+                      "expression": "SUM(`total_acidentes`)"
+                    },
+                    {
+                      "name": "bairro",
+                      "expression": "`bairro`"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "frame": {
+                "title": "Distribuição de Acidentes por Bairro",
+                "showTitle": true,
+                "showDescription": false
+              },
+              "widgetType": "pie",
+              "encodings": {
+                "angle": {
+                  "fieldName": "sum(total_acidentes)",
+                  "scale": {
+                    "type": "quantitative"
+                  },
+                  "displayName": "Total de Acidentes"
+                },
+                "color": {
+                  "fieldName": "bairro",
+                  "displayName": "Bairro",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "label": {
+                  "show": true
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 13,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "a386d09c",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "2e4742a9",
+                  "fields": [
+                    {
+                      "name": "meio_transporte",
+                      "expression": "`meio_transporte`"
+                    },
+                    {
+                      "name": "taxa_fatalidade",
+                      "expression": "`taxa_fatalidade`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 3,
+              "mark": {
+                "colors": [
+                  "#AC3058",
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 2
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 3
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 4
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 5
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 6
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 7
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 8
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 9
+                  },
+                  {
+                    "themeColorType": "visualizationColors",
+                    "position": 10
+                  }
+                ]
+              },
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "meio_transporte",
+                  "displayName": "Meio de Transporte",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "taxa_fatalidade",
+                  "displayName": "Taxa de Fatalidade %",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
             "x": 6,
-            "y": 19,
+            "y": 25,
             "width": 6,
             "height": 6
           }
