@@ -90,7 +90,7 @@ Na Figura 2, observamos a interface da plataforma do Databricks. Na imagem podem
 
 ### Distribuição de acidentes por bairro:
 
-Na Figura 3 temos uma distribuição da participação de cada bairro no número total de acidentes. Como podemos observar, Boa Viagem foi o bairro do Recife que mais ocorreu acidentes em 2024, 
+Na Figura 3 temos uma distribuição da participação de cada bairro no número total de acidentes. O gráfico está no formato de pizza e cada fatia representa o percentual de acidentes por bairro. Como podemos observar, Boa Viagem foi o bairro do Recife que mais ocorreu acidentes em 2024, com 10.33% dos acidentes totais. Em segundo, temos Imbiribeira com 5.74% e em terceiro Santo Amaro com 5,57%. O gráfico é interativo e te permite consultar cada bairro encontrado nos dados. 
 
 
  <p align="center">
@@ -100,3 +100,53 @@ Na Figura 3 temos uma distribuição da participação de cada bairro no número
 <p align="center">
   <em>Figura 3: Distribuição de acidentes por bairro.</em>
 </p>
+
+
+
+### Total de acidentes por hora:
+
+Na Figura 4, observamos um gráfico de área com o total de acidentes entre as primeiras 12 horas do dia. Aqui podemos observar que os dados estão limitados apenas a estes horários, logo, nossa análise será limitada apenas a estes horários do dia. No entanto, podemos concluir que no período de 1h e 12h, os horários entre 6h e 8h concentram o maior número de acidentes. Nos outros horários temos uma média de 400 acidentes por hora, enquanto que o horários destacado, entre 6h e 8h possuem uma média de 600 acidentes por hora. Isto ocorre devido ao maior fluxo devido ao horário de pico. 
+
+
+ <p align="center">
+  <img src="imgs/Total de acidentes por hora.png" width="1000">
+</p>
+
+<p align="center">
+  <em>Figura 4: Total de acidentes por hora.</em>
+</p>
+
+
+### Acidentes por meio de transporte:
+
+Por último, iremos fazer uma nálise por meio de transporte. Como podemos observar na Figura 5, carros e motos foram os que mais se envolveram em acidentes, isto ocorre devido ao fato de serem os meios de transporte mais comuns. Outro fator que devemos considerar é o cruzamento de dados, tivemos um total de 5320 acidentes, mas se fizermos uma soma entre o total de acidentes com participação de moto com os acidentes com envolvimento de carros a soma resultará em 6000. Isto ocorre devido as colisões ocorridas, dois ou mais tipos de transporte podem participar de um único acidente. 
+
+
+ <p align="center">
+  <img src="imgs/Total de acidentes por meio de transporte.png" width="1000">
+</p>
+
+<p align="center">
+  <em>Figura 5: Total de acidentes por meio de transporte.</em>
+</p>
+
+
+Como moto e carro são mais comuns, é natural que causem mais acidentes. Logo, torna-se obrigatório observar a taxa de fatalidade de cada transporte, isto é, a razão entre o número total de acidentes fatais por tipo de veículo e o número total de acidentes causados por tipo de transporte. Quando observamos maior percentil de fatalidade em: caminhão, ciclista, pedestres e "outros". A categoria “outros” representa meios de transporte não classificados nas categorias principais ou registros genéricos presentes na base de dados. 
+
+
+
+ <p align="center">
+  <img src="imgs/fatalidade meio de transporte.png" width="1000">
+</p>
+
+<p align="center">
+  <em>Figura 6: Acidentes fatais por meio de transporte.</em>
+</p>
+
+
+Outros gráficos explorados podem ser visualizados no diretório **imgs** deste repositório. 
+
+
+## Como executar este projeto?
+
+
