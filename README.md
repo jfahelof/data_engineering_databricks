@@ -149,6 +149,8 @@ Outros gráficos explorados podem ser visualizados no diretório **imgs** deste 
 
 ## Como executar este projeto?
 
+Para executar este projeto, é necessário que você possua uma conta no databricks free edition.
+
 Como o databricks free edition possui algumas limitações, foi necessário rodar o notebook **API.ipynb** localmente para obter os dados no arquivo **data.csv**. Logo após, criamos um diretório no **Workspace** do Databricks e inserimos todos os outros notebooks encontrados no diretório **notebooks** deste repositório. 
 
 Agora, dentro do Databricks, executamos:
@@ -163,7 +165,7 @@ Agora, dentro do Databricks, executamos:
 
 ### 5: executamos o **notebook_04_gold**; 
 
-### 6: executamos o ** notebook_05_analytics** e poderemos observar alguns gráficos obtidos usando bibliotecas de visualização do Python;
+### 6: executamos o **notebook_05_analytics** e poderemos observar alguns gráficos obtidos usando bibliotecas de visualização do Python;
 
 ### 7: Finalmente podemos montar nosso dashboard com o **SQL Warehouses**. Temos um arquivo .json neste repositório, você pode realizar o upload na plataforma do databricks. 
 
