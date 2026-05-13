@@ -15,12 +15,12 @@ Na Figura 1, apresentamos a arquitetura da pipeline desenvolvida neste projeto.
   <em>Figura 1: Arquitetura da pipeline baseada na arquitetura Medallion.</em>
 </p>
 
-Na Figura 1, observamos no topo as principais tecnologias utilizadas. Utilizamos a plataforma Databricks Free Edition devido à sua integração nativa com Apache Spark e Delta Lake, permitindo o desenvolvimento de pipelines de engenharia de dados de forma escalável e organizada. Além disso, a plataforma fornece um ambiente unificado para ingestão, processamento, armazenamento, análise e visualização dos dados, facilitando a implementação da arquitetura Medallion utilizada neste projeto. Ao longo do projeto também utilizamos a linguagem Python e algumas de suas bibliotecas como Pandas, Pyspark e Numpy. Para trabalhar com tabelas, utilizamos SQL. 
+Na Figura 1, observamos toda arquitetura da pipeline desenvolvida neste projeto. Utilizamos a plataforma Databricks Free Edition devido à sua integração nativa com Apache Spark e Delta Lake, permitindo o desenvolvimento de pipelines de engenharia de dados de forma escalável e organizada. Além disso, a plataforma fornece um ambiente unificado para ingestão, processamento, armazenamento, análise e visualização dos dados, facilitando a implementação da arquitetura Medallion utilizada neste projeto. Ao longo do projeto também utilizamos a linguagem Python e algumas de suas bibliotecas como Pandas, Pyspark e Numpy. Para trabalhar com tabelas, utilizamos SQL. 
 
 Vamos explicar como cada etapa da pipeline foi desenvolvida. 
 
 
-### Fonte de dados
+### Fonte  e extração dos dados
 
 Os dados explorados neste trabalho foram obtidos a partir dos dados públicos de Sinistros de Trânsito com e sem vitimas do ano 2024 da capital pernambucana, Recife, disponibilizados pela [API de Dados Abertos do Recife](https://dados.recife.pe.gov.br/es/dataset/acidentes-de-transito-com-e-sem-vitimas/resource/87ac4237-f5f9-44d2-bcf1-927aaa0a2d31). Utilizamos o notebook **API.ipynb** para fazer a requisição dos dados **data.csv**. 
 
