@@ -150,14 +150,22 @@ Outros gráficos explorados podem ser visualizados no diretório **imgs** deste 
 
 ## Segurança, Governança e Monitoramento
 
-Um ponto crucial deste projeto é que, embora tenha sido desenvolvido no **Databricks Free Edition** (que possui limitações de segurança por ser uma versão gratuita), a arquitetura foi pensada para um **cenário corporativo real**. Abaixo, descrevo as medidas de segurança e monitoramento que fazem parte da estratégia de governança deste pipeline.
+Um ponto crucial deste projeto é que, embora tenha sido desenvolvido no **Databricks Free Edition** (que possui limitações de segurança por ser uma versão gratuita), a arquitetura foi pensada para um **cenário corporativo real**, adotando as melhores práticas do **Databricks Unity Catalog**.
+
+### Governança de Dados com Unity Catalog
+
+Para organizar e proteger o ecossistema de dados, mapeamos o pipeline dentro da estrutura de três níveis do Unity Catalog (`catalog.schema.table`):
+
+* **Organização em Schemas:** Criamos um catálogo centralizado onde cada camada da arquitetura Medallion é representada por um **Schema** (`bronze`, `silver` e `gold`), garantindo total isolamento lógico dos dados.
+* **Tabelas Não Gerenciadas (Unmanaged Tables) na Bronze:** Na camada Bronze, os dados brutos da API são registrados como tabelas externas. Utilizamos o conceito de **External Locations** para mapear os arquivos diretamente no Cloud Storage. Isso garante que, se uma tabela for excluída acidentalmente (`DROP TABLE`), os arquivos físicos originais permanecem intactos no storage para fins de auditoria.
+* **Tabelas Gerenciadas (Managed Tables) na Silver e Gold:** À medida que os dados são limpos e agregados, eles passam a ser salvos como *Managed Tables*. O Unity Catalog assume o controle total sobre o ciclo de vida e a performance desses dados em formato Delta Lake, otimizando as consultas que alimentam o dashboard final.
 
 ### Segurança dos Dados no Processo de ETL
 
 Para garantir que os dados de sinistros do Recife circulem de forma protegida, a pipeline segue estas diretrizes:
 
 * **Criptografia em Trânsito e Repouso:** Todo o consumo da API de Dados Abertos é feito via protocolos seguros (**HTTPS/TLS**). No armazenamento, os dados são persistidos no Data Lake com criptografia de ponta, protegendo as informações contra acessos não autorizados.
-* **RBAC (Controle de Acesso):** A estrutura de schemas (Bronze, Silver e Gold) permite aplicar permissões específicas, garantindo que o acesso aos dados seja restrito apenas ao necessário para cada nível de análise.
+* **RBAC (Controle de Acesso):** A estrutura de schemas do Unity Catalog permite aplicar permissões específicas (usando comandos como `GRANT`), garantindo que o acesso às tabelas seja restrito apenas ao necessário para cada nível de análise.
 * **Tratamento de Dados Sensíveis:** Como mencionado na camada Silver, realizamos a remoção de protocolos e identificadores, garantindo a privacidade e a conformidade com boas práticas de proteção de dados.
 
 ### Proposta de Arquitetura Segura (Cenário Azure)
