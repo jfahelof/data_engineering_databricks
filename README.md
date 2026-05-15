@@ -195,7 +195,7 @@ Como o databricks free edition possui algumas limitações, foi necessário roda
 
 Agora, dentro do Databricks, executamos:
 
-##### 1: o **notebook_01_medallion** para criar os bancos de dados para cada camada da arquitetura medallion;
+##### 1: o **notebook_01_medallion** para criar os Catalogs e Schemas necessários na arquitetura medallion;
 
 ##### 2: Na aba **Data Ingestion** criamos um volume chamado **dbs** e fazemos a ingestão do arquivo **data.csv**;
 
