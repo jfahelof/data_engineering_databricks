@@ -195,19 +195,19 @@ Como o databricks free edition possui algumas limitações, foi necessário roda
 
 Agora, dentro do Databricks, executamos:
 
-### 1: o **notebook_01_medallion** para criar os bancos de dados para cada camada da arquitetura medallion;
+##### 1: o **notebook_01_medallion** para criar os bancos de dados para cada camada da arquitetura medallion;
 
-### 2: Na aba **Data Ingestion** criamos um volume chamado **dbs** e fazemos a ingestão do arquivo **data.csv**;
+##### 2: Na aba **Data Ingestion** criamos um volume chamado **dbs** e fazemos a ingestão do arquivo **data.csv**;
 
-### 3: executamos o **notebook_02_bronze**; 
+##### 3: executamos o **notebook_02_bronze**; 
 
-### 4: executamos o **notebook_03_silver**; 
+##### 4: executamos o **notebook_03_silver**; 
 
-### 5: executamos o **notebook_04_gold**; 
+##### 5: executamos o **notebook_04_gold**; 
 
-### 6: executamos o **notebook_05_analytics** e poderemos observar alguns gráficos obtidos usando bibliotecas de visualização do Python;
+##### 6: executamos o **notebook_05_analytics** e poderemos observar alguns gráficos obtidos usando bibliotecas de visualização do Python;
 
-### 7: Finalmente podemos montar nosso dashboard com o **SQL Warehouses**. Temos um arquivo .json neste repositório, você pode realizar o upload na plataforma do databricks. 
+##### 7: Finalmente podemos montar nosso dashboard com o **SQL Warehouses**. Temos um arquivo .json neste repositório, você pode realizar o upload na plataforma do databricks. 
 
 
 
