@@ -60,7 +60,7 @@ Após o processo de tipagem e limpeza dos dados, observamos uma redução superi
 Embora o cenário atual não envolva ingestão incremental, a utilização do Delta Lake garante que o pipeline esteja preparado para evoluções futuras, mantendo escalabilidade e robustez. Após a gravação dos dados, será criada uma tabela no catálogo do Databricks (Unity Catalog), permitindo consultas via SQL diretamente sobre os dados armazenados no Data Lake, sem necessidade de duplicação. Essa abordagem assegura um fluxo de dados eficiente, confiável e alinhado com boas práticas de engenharia de dados. Todo este processo da camada Silver está presente no **notebook_03_silver.ipynb**. Agora, vamos para a camada Gold. 
 
 
-## Gold
+### Gold
 
 A camada Gold da arquitetura medallion é a etapa da pipeline de dados responsável pela disponibilização de dados refinados, agregados e prontos para consumo analítico. Nessa camada, são aplicadas regras de negócio, métricas e transformações que permitem gerar insights estratégicos, dashboards e análises preditivas.
 
@@ -69,7 +69,7 @@ Como o projeto utiliza dados de sinistros de trânsito da cidade do Recife, o fo
 Além disso, foram criadas métricas agregadas e tabelas otimizadas para visualização em dashboards no Databricks, permitindo uma análise mais eficiente dos padrões de acidentes ao longo do tempo e do espaço urbano. O objetivo final dessa camada é transformar os dados processados em informações úteis para apoiar tomadas de decisão, planejamento urbano e possíveis ações de prevenção de acidentes. Todo processo aplicado na camada Gold está presente no **notebook_04_gold.ipynb**. Agora, vamos para a etapa final da pipeline, Analytics. 
  
 
-## Analytics
+### Dashboard & Analytics 
 
 A etapa Analytics é a parte final da nossa pipeline de dados, ela é responsável pela exploração visual e interpretação dos dados processados na camada Gold. Nesta etapa, os dados refinados são utilizados para construir gráficos, dashboards e indicadores que auxiliam na identificação de padrões e tendências relacionadas aos sinistros de trânsito em Recife. A camada Analytics permite que gestores, analistas e usuários finais obtenham insights relevantes para apoiar tomadas de decisão e estratégias voltadas à mobilidade urbana e segurança no trânsito.
 
@@ -145,6 +145,46 @@ Como moto e carro são mais comuns, é natural que causem mais acidentes. Logo, 
 
 
 Outros gráficos explorados podem ser visualizados no diretório **imgs** deste repositório. 
+
+
+
+## Segurança, Governança e Monitoramento
+
+Um ponto crucial deste projeto é que, embora tenha sido desenvolvido no **Databricks Free Edition** (que possui limitações de segurança por ser uma versão gratuita), a arquitetura foi pensada para um **cenário corporativo real**. Abaixo, descrevo as medidas de segurança e monitoramento que fazem parte da estratégia de governança deste pipeline.
+
+### Segurança dos Dados no Processo de ETL
+
+Para garantir que os dados de sinistros do Recife circulem de forma protegida, a pipeline segue estas diretrizes:
+
+* **Criptografia em Trânsito e Repouso:** Todo o consumo da API de Dados Abertos é feito via protocolos seguros (**HTTPS/TLS**). No armazenamento, os dados são persistidos no Data Lake com criptografia de ponta, protegendo as informações contra acessos não autorizados.
+* **RBAC (Controle de Acesso):** A estrutura de schemas (Bronze, Silver e Gold) permite aplicar permissões específicas, garantindo que o acesso aos dados seja restrito apenas ao necessário para cada nível de análise.
+* **Tratamento de Dados Sensíveis:** Como mencionado na camada Silver, realizamos a remoção de protocolos e identificadores, garantindo a privacidade e a conformidade com boas práticas de proteção de dados.
+
+### Proposta de Arquitetura Segura (Cenário Azure)
+
+Caso este projeto fosse escalado para um ambiente de produção na **Microsoft Azure**, a arquitetura apresentada na **Figura 1** seria reforçada com:
+
+* **Microsoft Entra ID & MFA:** Para autenticação centralizada e camadas extras de verificação no login.
+* **Azure Key Vault:** Para gerenciar com segurança as chaves da API e credenciais de acesso, evitando que segredos fiquem expostos no código dos notebooks.
+* **VNETs e Firewalls:** Isolamento de rede para garantir que o tráfego de dados ocorra dentro de um ambiente controlado e privado, longe da internet pública.
+* **Microsoft Defender for Cloud:** Monitoramento proativo para identificar ameaças e vulnerabilidades na infraestrutura do Data Lake.
+
+### Estratégia de Monitoramento e Qualidade
+
+O monitoramento é o que garante que o dashboard da Figura 2 esteja sempre atualizado e confiável. Minha estratégia foca em:
+
+#### Observabilidade do Pipeline
+Utilizo os **Logs de Auditoria** do Databricks para registrar cada execução dos notebooks. Em um cenário ideal, ferramentas como o **Azure Monitor** seriam integradas para disparar alertas automáticos caso a ingestão da API falhe ou a latência dos dados ultrapasse o SLA (Acordo de Nível de Serviço) esperado.
+
+#### Métricas de Performance e Qualidade
+Para manter a saúde dos dados, acompanho de perto estas métricas:
+* **Latência:** O tempo total que o dado leva desde a extração na API até estar pronto para o Dashboard na camada Gold.
+* **Taxa de Erros:** Monitoramento de falhas de tipagem ou registros malformados durante o refinamento na camada Silver.
+* **Integridade e Completude:** Verificamos o percentual de campos obrigatórios (como 'bairro' ou 'tipo de veículo') preenchidos, garantindo que a análise final seja precisa e livre de lacunas.
+
+#### Ferramentas de Apoio
+Além das métricas nativas do Databricks, a arquitetura prevê o uso de **Log Analytics** para consultas profundas sobre o comportamento histórico do pipeline e o **SQL Warehouse** para monitorar a performance das consultas que alimentam nossas visualizações analíticas.
+
 
 
 ## Como executar este projeto?
