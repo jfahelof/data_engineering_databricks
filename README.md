@@ -74,7 +74,20 @@ Além disso, foram criadas métricas agregadas e tabelas otimizadas para visuali
 A etapa Analytics é a parte final da nossa pipeline de dados, ela é responsável pela exploração visual e interpretação dos dados processados na camada Gold. Nesta etapa, os dados refinados são utilizados para construir gráficos, dashboards e indicadores que auxiliam na identificação de padrões e tendências relacionadas aos sinistros de trânsito em Recife. A camada Analytics permite que gestores, analistas e usuários finais obtenham insights relevantes para apoiar tomadas de decisão e estratégias voltadas à mobilidade urbana e segurança no trânsito.
 
 
-O produto final do projeto foi um dashboard com algumas das possíveis anélises. Como o objetivo deste trabalho é focado em engenharia de dados, não fora realizado uma análise mais profunda. O dashboard foi construído na plataforma do Databricks. Através do SQL Warehouse do Databricks, foi possível recuperar todas as informações (tabelas) produzidas na camada Gold.  
+
+<p align="center">
+  <img src="imgs/dash_power_bi_01.png" width="480">
+  <img src="imgs/dash_power_bi_02.png" width="480">
+</p>
+
+<p align="center">
+  <em>Figura 2: Construção do Dashboard no Power Bi.</em>
+</p>
+
+
+
+
+O produto final do projeto foi um dashboard com algumas das possíveis anélises. Como o objetivo deste trabalho é focado em engenharia de dados, não fora realizado uma análise mais profunda. O dashboard foi construído na plataforma do Databricks. Através do SQL Warehouse do Databricks, foi possível recuperar todas as informações (tabelas) produzidas na camada Gold. Também é possível compartilhar as tabelas da camaga gold com a plataforma de visualização de dados da Microsoft, [Power Bi](https://www.microsoft.com/pt-br/power-platform/products/power-bi). O dashboard criado na plataforma power Bi pode ser visualizado na Figuras 2. Na imagem temos um dashboard interativo com o número total de sinistros, vitimas e vítimas fatais e, ao lado direito, temos um mapa para auxiliar com informação geográfica.
 
 
  <p align="center">
@@ -82,15 +95,15 @@ O produto final do projeto foi um dashboard com algumas das possíveis anélises
 </p>
 
 <p align="center">
-  <em>Figura 2: Construção do Dashboard no Databricks.</em>
+  <em>Figura 3: Construção do Dashboard no Databricks.</em>
 </p>
 
-Na Figura 2, observamos a interface da plataforma do Databricks. Na imagem podemos observar o título do dashboard, um total de 5320 acidentes, 5040 vítimas e o número total de 40 vítimas fatais. Logo abaixo temos um gráfico de barras interativo indicando o número total de acidentes por bairro. O restante do dashboard é formado por mais alguns gráficos, iremos discutir os resultados de forma detalhada. 
+Na Figura 3, observamos a interface da plataforma do Databricks. Na imagem podemos observar o título do dashboard, um total de 5320 acidentes, 5040 vítimas e o número total de 40 vítimas fatais. Logo abaixo temos um gráfico de barras interativo indicando o número total de acidentes por bairro. O restante do dashboard é formado por mais alguns gráficos, iremos discutir os resultados de forma detalhada. 
 
 
 ### Distribuição de acidentes por bairro:
 
-Na Figura 3 temos uma distribuição da participação de cada bairro no número total de acidentes. O gráfico está no formato de pizza e cada fatia representa o percentual de acidentes por bairro. Como podemos observar, Boa Viagem foi o bairro do Recife que mais ocorreu acidentes em 2024, com 10.33% dos acidentes totais. Em segundo, temos Imbiribeira com 5.74% e em terceiro Santo Amaro com 5,57%. O gráfico é interativo e te permite consultar cada bairro encontrado nos dados. 
+Na Figura 4 temos uma distribuição da participação de cada bairro no número total de acidentes. O gráfico está no formato de pizza e cada fatia representa o percentual de acidentes por bairro. Como podemos observar, Boa Viagem foi o bairro do Recife que mais ocorreu acidentes em 2024, com 10.33% dos acidentes totais. Em segundo, temos Imbiribeira com 5.74% e em terceiro Santo Amaro com 5,57%. O gráfico é interativo e te permite consultar cada bairro encontrado nos dados. 
 
 
  <p align="center">
@@ -98,14 +111,14 @@ Na Figura 3 temos uma distribuição da participação de cada bairro no número
 </p>
 
 <p align="center">
-  <em>Figura 3: Distribuição de acidentes por bairro.</em>
+  <em>Figura 4: Distribuição de acidentes por bairro.</em>
 </p>
 
 
 
 ### Total de acidentes por hora:
 
-Na Figura 4, observamos um gráfico de área com o total de acidentes entre as primeiras 12 horas do dia. Aqui podemos observar que os dados estão limitados apenas a estes horários, logo, nossa análise será limitada apenas a estes horários do dia. No entanto, podemos concluir que no período de 1h e 12h, os horários entre 6h e 8h concentram o maior número de acidentes. Nos outros horários temos uma média de 400 acidentes por hora, enquanto que o horários destacado, entre 6h e 8h possuem uma média de 600 acidentes por hora. Isto ocorre devido ao maior fluxo devido ao horário de pico. 
+Na Figura 5, observamos um gráfico de área com o total de acidentes entre as primeiras 12 horas do dia. Aqui podemos observar que os dados estão limitados apenas a estes horários, logo, nossa análise será limitada apenas a estes horários do dia. No entanto, podemos concluir que no período de 1h e 12h, os horários entre 6h e 8h concentram o maior número de acidentes. Nos outros horários temos uma média de 400 acidentes por hora, enquanto que o horários destacado, entre 6h e 8h possuem uma média de 600 acidentes por hora. Isto ocorre devido ao maior fluxo devido ao horário de pico. 
 
 
  <p align="center">
@@ -113,13 +126,13 @@ Na Figura 4, observamos um gráfico de área com o total de acidentes entre as p
 </p>
 
 <p align="center">
-  <em>Figura 4: Total de acidentes por hora.</em>
+  <em>Figura 5: Total de acidentes por hora.</em>
 </p>
 
 
 ### Acidentes por meio de transporte:
 
-Por último, iremos fazer uma nálise por meio de transporte. Como podemos observar na Figura 5, carros e motos foram os que mais se envolveram em acidentes, isto ocorre devido ao fato de serem os meios de transporte mais comuns. Outro fator que devemos considerar é o cruzamento de dados, tivemos um total de 5320 acidentes, mas se fizermos uma soma entre o total de acidentes com participação de moto com os acidentes com envolvimento de carros a soma resultará em 6000. Isto ocorre devido as colisões ocorridas, dois ou mais tipos de transporte podem participar de um único acidente. 
+Por último, iremos fazer uma nálise por meio de transporte. Como podemos observar na Figura 6, carros e motos foram os que mais se envolveram em acidentes, isto ocorre devido ao fato de serem os meios de transporte mais comuns. Outro fator que devemos considerar é o cruzamento de dados, tivemos um total de 5320 acidentes, mas se fizermos uma soma entre o total de acidentes com participação de moto com os acidentes com envolvimento de carros a soma resultará em 6000. Isto ocorre devido as colisões ocorridas, dois ou mais tipos de transporte podem participar de um único acidente. 
 
 
  <p align="center">
@@ -127,11 +140,11 @@ Por último, iremos fazer uma nálise por meio de transporte. Como podemos obser
 </p>
 
 <p align="center">
-  <em>Figura 5: Total de acidentes por meio de transporte.</em>
+  <em>Figura 6: Total de acidentes por meio de transporte.</em>
 </p>
 
 
-Como moto e carro são mais comuns, é natural que causem mais acidentes. Logo, torna-se obrigatório observar a taxa de fatalidade de cada transporte, isto é, a razão entre o número total de acidentes fatais por tipo de veículo e o número total de acidentes causados por tipo de transporte. Quando observamos maior fração de acidentes com vítimas fatais em: caminhão, ciclista, pedestres e "outros". A categoria “outros” representa meios de transporte não classificados nas categorias principais ou registros genéricos presentes na base de dados. 
+Como moto e carro são mais comuns, é natural que causem mais acidentes. Logo, torna-se obrigatório observar a taxa de fatalidade de cada transporte, isto é, a razão entre o número total de acidentes fatais por tipo de veículo e o número total de acidentes causados por tipo de transporte. Observamos maior fração de acidentes com vítimas fatais em: caminhão, ciclista, pedestres e "outros" como mostra na Figura 7. A categoria “outros” representa meios de transporte não classificados nas categorias principais ou registros genéricos presentes na base de dados. 
 
 
 
@@ -140,7 +153,7 @@ Como moto e carro são mais comuns, é natural que causem mais acidentes. Logo, 
 </p>
 
 <p align="center">
-  <em>Figura 6: Acidentes fatais por meio de transporte.</em>
+  <em>Figura 7: Acidentes fatais por meio de transporte.</em>
 </p>
 
 
