@@ -76,8 +76,8 @@ A etapa Analytics é a parte final da nossa pipeline de dados, ela é responsáv
 
 
 <p align="center">
-  <img src="imgs/dash_power_bi_01.png" width="480">
-  <img src="imgs/dash_power_bi_02.png" width="480">
+  <img src="imgs/dash_power_bi_01.png" width="800">
+  <img src="imgs/dash_power_bi_02.png" width="800">
 </p>
 
 <p align="center">
@@ -205,6 +205,46 @@ Para manter a saúde dos dados, acompanho de perto estas métricas:
 
 #### Ferramentas de Apoio
 Além das métricas nativas do Databricks, a arquitetura prevê o uso de **Log Analytics** para consultas profundas sobre o comportamento histórico do pipeline e o **SQL Warehouse** para monitorar a performance das consultas que alimentam nossas visualizações analíticas.
+
+
+
+## Orquestração e Automação de Pipelines (Databricks Jobs)
+
+Para transformar esse pipeline analítico em um processo automatizado, robusto e produtivo, implementamos uma estratégia de orquestração utilizando o **Databricks Jobs**. O objetivo é garantir que as transformações e atualizações das camadas ocorram de forma sequencial, respeitando as dependências do fluxo de dados.
+
+### Arquitetura do Job no Databricks Free Edition
+
+Devido às limitações da versão gratuita do Databricks (que não possui suporte nativo para requisições de rede externas/APIs robustas ou execução de determinados drivers locais), a etapa de extração inicial (**API.ipynb**) foi executada localmente para gerar o arquivo `data.csv`. 
+
+A partir do momento em que o dado bruto é disponibilizado no ambiente, a orquestração foi desenhada como um grafo de dependências (DAG) composto por **3 tasks sequenciais**:
+
+1. **Task 1 (Camada Bronze):** Executa o `notebook_02_bronze.ipynb`, que lê os novos dados brutos e realiza a carga inicial (*append*) na tabela externa da Bronze, adicionando os metadados de auditoria.
+2. **Task 2 (Camada Silver):** Disparada automaticamente após o sucesso da Task 1. Executa o `notebook_03_silver.ipynb` para aplicar as regras de limpeza, tipagem, tratamento de nulos e otimização de memória.
+3. **Task 3 (Camada Gold):** Disparada após o sucesso da Task 2. Executa o `notebook_04_gold.ipynb`, atualizando as tabelas agregadas e recalculando as métricas de negócio que alimentam as visões analíticas.
+
+> **Nota de Limitação:** No Databricks Free Edition, este Job é disparado manualmente para simular o comportamento de uma esteira produtiva. Na Figura 8 podemos visualizar a orquestração na interface do Databricks. 
+
+
+
+<p align="center">
+  <img src="imgs/job_01.png" width="800">
+  <img src="imgs/job_02.png" width="800">
+</p>
+
+<p align="center">
+  <em>Figura 8: Orquestração de notebooks utilizando o **Databricks Jobs**.</em>
+</p>
+
+
+
+
+### Cenário Ideal e Escalabilidade na Azure
+
+Em um ambiente corporativo real utilizando o **Azure Databricks**, esse fluxo seria totalmente ponta a ponta e agendado (*Scheduled Time-Based* ou *Event-Driven* via Azure Data Factory / Airflow):
+
+* **Task Zero Integrada:** O notebook `API.ipynb` seria a primeira Task do Job, rodando nativamente dentro do cluster conectado à internet de forma segura. Ele faria a requisição diária/horária dos dados novos na API de Dados Abertos do Recife e salvaria diretamente em um *Mount Point* do Azure Blob Storage ou ADLS Gen2.
+* **Atualização Automática do Dashboard:** Com o uso de tabelas Delta e o **Databricks SQL Warehouse**, qualquer nova execução bem-sucedida do Job propagaria as atualizações instantaneamente até a camada Gold. Ferramentas como o **Power BI** (utilizando o modo *DirectQuery*) ou os próprios **Dashboards nativos do Databricks** refletiriam os novos sinistros de trânsito automaticamente, sem necessidade de qualquer intervenção humana.
+
 
 
 
