@@ -232,7 +232,7 @@ A partir do momento em que o dado bruto é disponibilizado no ambiente, a orques
 </p>
 
 <p align="center">
-  <em>Figura 8: Orquestração de notebooks utilizando o **Databricks Jobs**.</em>
+  <em>Figura 8: Orquestração de notebooks utilizando o Databricks Jobs.</em>
 </p>
 
 
