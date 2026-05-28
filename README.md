@@ -167,7 +167,7 @@ Um ponto crucial deste projeto é que, embora tenha sido desenvolvido no **Datab
 
 ### Governança de Dados com Unity Catalog
 
-Para organizar e proteger o ecossistema de dados, mapeamos o pipeline dentro da estrutura de três níveis do Unity Catalog (`catalog.schema.table`):
+O Unity Catalog nos permite monitorar todos os fluxos e ciclos de vida dos dados de ponta a ponta, centralizando a governança e mapeando automaticamente o lineage (linhagem) desde a ingestão bruta até a tabela que alimenta o dashboard final. Para organizar e proteger o ecossistema de dados, mapeamos o pipeline dentro da estrutura de três níveis do Unity Catalog (`catalog.schema.table`):
 
 * **Organização em Schemas:** Criamos um catálogo centralizado onde cada camada da arquitetura Medallion é representada por um **Schema** (`bronze`, `silver` e `gold`), garantindo total isolamento lógico dos dados.
 * **Tabelas Não Gerenciadas (Unmanaged Tables) na Bronze:** Na camada Bronze, os dados brutos da API são registrados como tabelas externas. Utilizamos o conceito de **External Locations** para mapear os arquivos diretamente no Cloud Storage. Isso garante que, se uma tabela for excluída acidentalmente (`DROP TABLE`), os arquivos físicos originais permanecem intactos no storage para fins de auditoria.
