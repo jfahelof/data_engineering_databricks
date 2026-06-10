@@ -66,7 +66,7 @@ def silver_sinistros():
     df = df.drop(*colunas_existentes)
  
   
-    # 3. Converte colunas numéricas de string para int
+    # 3 Converte colunas numéricas de string para int
     #    Padrão original: "1,0" -> 1,  "2,0" -> 2, etc.
   
     colunas_numericas = [
@@ -86,7 +86,7 @@ def silver_sinistros():
         ]
     )
  
-    # 4. Padroniza nulos em colunas de texto -> "NA"
+    # 4 Padroniza nulos em colunas de texto -> "NA"
     colunas_texto = ["complemento", "bairro", "endereco", "bairro_cruzamento", "tipo"]
     for col_txt in colunas_texto:
         if col_txt in df.columns:
@@ -95,7 +95,7 @@ def silver_sinistros():
     return df
  
  
-# CAMADA GOLD — Tabela 1: por Bairro
+# CAMADA GOLD  Tabela 1: por Bairro
 # Total de acidentes, vítimas, vítimas fatais, taxa de fatalidade e
 # percentual de acidentes por bairro. Inclui coluna de geolocalização
 # formatada para Power BI
@@ -137,7 +137,7 @@ def gold_bairro():
     return df_bairro
  
  
-# CAMADA GOLD — Tabela 2: por Meio de Transporte
+# CAMADA GOLD  Tabela 2: por Meio de Transporte
 # Para cada modal (auto, moto, ciclista, pedestre etc.): total de acidentes
 # em que esteve envolvido e total de vítimas fatais associadas.
  
@@ -186,7 +186,7 @@ def gold_transporte():
     return df_resultado
  
  
-# CAMADA GOLD — Tabela 3: por Hora do Dia
+# CAMADA GOLD Tabela 3: por Hora do Dia
 # Distribuição dos acidentes ao longo das 24 horas do dia.
 # Observação: os dados de origem são parciais (madrugada até meio-dia),
 # portanto a análise refletirá essa limitação.
@@ -213,7 +213,7 @@ def gold_hora():
     return df_hora
  
  
-# CAMADA GOLD — Tabela 4: por Mês
+# CAMADA GOLD Tabela 4: por Mês
 # Evolução mensal de acidentes, vítimas totais, vítimas fatais e
 # taxa de fatalidade ao longo do ano
  
