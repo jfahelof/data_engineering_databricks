@@ -247,6 +247,43 @@ Em um ambiente corporativo real utilizando o **Azure Databricks**, esse fluxo se
 
 
 
+## Delta Live Tables
+
+Como alternativa à orquestração via Databricks Jobs com notebooks individuais, o mesmo pipeline foi reimplementado utilizando **Delta Live Tables (DLT)**, um framework declarativo nativo do Databricks para construção de pipelines ETL confiáveis e escaláveis.
+
+ <p align="center">
+  <img src="imgs/DLT_recife.png" width="1000">
+</p>
+
+<p align="center">
+  <em>Figura 9: Pipeline ETL implementado com Delta Live Tables.</em>
+</p>
+
+Na Figura 9, observamos a interface do pipeline DLT após uma execução completa e bem-sucedida, realizada em **1 minuto e 11 segundos**. O painel é dividido em três áreas principais: o grafo do pipeline (centro-esquerda), os detalhes do pipeline (direita) e a listagem das tabelas produzidas (inferior).
+
+### Grafo do Pipeline
+
+O grafo representa visualmente o DAG (Directed Acyclic Graph) do pipeline, evidenciando as dependências entre as camadas:
+
+- A tabela **Bronze** (`tb_sinistros_transito_open_data_bronze_dlt`) é o ponto de entrada, lendo os dados brutos do CSV e produzindo **5.3K registros**.
+- A tabela **Silver** (`tb_sinistros_transito_open_data_silver_dlt`) depende diretamente do Bronze, aplicando limpeza, tipagem e remoção de duplicatas, também com **5.3K registros** e **1 expectation** ativa (validação do campo `bairro`).
+- A partir do Silver, **4 tabelas Gold são processadas em paralelo**, cada uma com ✅ verde:
+  - `tb_sinistros_transito_transporte_gold_dlt` → **9 registros** (um por modal)
+  - `tb_sinistros_transito_bairro_gold_dlt` → **94 registros** (um por bairro)
+  - `tb_sinistros_transito_mes_gold_dlt` → **12 registros** (um por mês)
+  - `tb_sinistros_transito_hora_gold_dlt` → **12 registros** (horas presentes nos dados)
+
+Todas as tabelas foram geradas com **Full recompute**, modalidade equivalente ao `overwrite` dos notebooks originais.
+
+### Detalhes do Pipeline e Governança
+
+No painel direito, observamos que o pipeline está registrado como **ETL pipeline** no catálogo `workspace`, schema `dlt_sinistros`, com todas as tabelas do tipo **Materialized view**. O Run status indica **Completed**, com **0 erros, 0 warnings e 0 falhas**, confirmando a integridade total da execução. O pipeline também expõe o **Pipeline ID** e o **Run ID**, facilitando rastreabilidade e auditoria.
+
+### Comparativo com a Abordagem por Notebooks
+
+Em relação à orquestração via Databricks Jobs, o DLT oferece vantagens estruturais relevantes: as dependências entre tabelas são declaradas no próprio código (via `dlt.read()`), eliminando a necessidade de configuração manual de tasks sequenciais. Além disso, o DLT gerencia automaticamente a ordem de execução, o controle de qualidade via expectations e a materialização incremental — tornando o pipeline mais robusto, legível e preparado para evoluções futuras como ingestão incremental e monitoramento contínuo de qualidade dos dados.
+
+
 
 ## Como executar este projeto?
 
